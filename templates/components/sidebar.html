@@ -1,0 +1,19 @@
+<aside id="app-sidebar" class="sidebar" aria-label="Application sidebar">
+  <div class="sidebar__brand"><a class="brand" href="{{ url_for('main.dashboard') }}"><span class="brand__mark">T</span><span class="brand__text">TerraMind <small>AI</small></span></a><button class="icon-button sidebar-close" type="button" data-sidebar-toggle aria-label="Close sidebar">×</button></div>
+  <nav class="sidebar__nav" aria-label="Sidebar navigation">
+    <p class="nav-label">Workspace</p>
+    <a class="nav-item" href="{{ url_for('main.dashboard') }}"><span aria-hidden="true">⌂</span><span>Dashboard</span></a>
+    <a class="nav-item" href="{{ url_for('main.predict') }}"><span aria-hidden="true">✦</span><span>Predict Crop</span></a>
+    <a class="nav-item" href="{{ url_for('main.history') }}"><span aria-hidden="true">◷</span><span>Prediction History</span></a>
+    <a class="nav-item" href="{{ url_for('main.analytics') }}"><span aria-hidden="true">◫</span><span>Analytics</span></a>
+    <p class="nav-label">Platform</p>
+    {% if current_user.is_authenticated and current_user.is_admin %}
+    <a class="nav-item" href="{{ url_for('main.model_info') }}"><span aria-hidden="true">◈</span><span>Model Information</span></a>
+    <a class="nav-item" href="{{ url_for('main.model_upload') }}"><span aria-hidden="true">↑</span><span>Upload Model</span></a>
+    {% endif %}
+    <a class="nav-item" href="{{ url_for('auth.profile') }}"><span aria-hidden="true">◉</span><span>Profile</span></a>
+    <a class="nav-item" href="{{ url_for('main.about') }}"><span aria-hidden="true">i</span><span>About</span></a>
+    <a class="nav-item" href="{{ url_for('main.contact') }}"><span aria-hidden="true">✉</span><span>Contact</span></a>
+  </nav>
+  <div class="sidebar__footer"><div class="model-status"><span class="status-dot status-dot--success"></span><span><strong>AI engine</strong><small>Ready to assist</small></span></div></div>
+</aside><div class="sidebar-backdrop" data-sidebar-toggle aria-hidden="true"></div>

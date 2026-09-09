@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Prediction History | TerraMind AI
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ url_for('main.home') }}">Home</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Prediction history</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<section class="history-page" aria-labelledby="history-title">
+
+    <!-- Header -->
+    <header class="history-header">
+
+        <div>
+            <p class="eyebrow">Prediction records</p>
+            <h1 id="history-title">Prediction History</h1>
+            <p>Review and manage previous crop predictions.</p>
+        </div>
+
+        <a class="btn btn--primary"
+           href="{{ url_for('main.predict') }}">
+            New Prediction
+        </a>
+
+    </header>
+
+    <div class="history-alert hidden"
+         data-history-alert
+         role="alert"
+         tabindex="-1">
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="history-summary" data-history-summary>
+
+        <article class="card stat-card">
+
+            <div>
+                <p class="stat-card__label">Total Predictions</p>
+                <p class="stat-card__value" data-summary-total>—</p>
+            </div>
+
+            <span class="stat-card__icon" aria-hidden="true">↗</span>
+
+        </article>
+
+        <article class="card stat-card">
+
+            <div>
+                <p class="stat-card__label">Predictions Today</p>
+                <p class="stat-card__value" data-summary-today>—</p>
+            </div>
+
+            <span class="stat-card__icon" aria-hidden="true">◷</span>
+
+        </article>
+
+        <article class="card stat-card">
+
+            <div>
+                <p class="stat-card__label">Average Confidence</p>
+                <p class="stat-card__value"
+                   data-summary-confidence>—</p>
+            </div>
+
+            <span class="stat-card__icon" aria-hidden="true">◎</span>
+
+        </article>
+
+        <article class="card stat-card">
+
+            <div>
+                <p class="stat-card__label">Latest Prediction</p>
+                <p class="stat-card__value history-date"
+                   data-summary-latest>—</p>
+            </div>
+
+            <span class="stat-card__icon" aria-hidden="true">◉</span>
+
+        </article>
+
+    </div>
+
+    <!-- Filters -->
+    <section class="card history-controls"
+             aria-label="Search and filter predictions">
+
+        <div class="filter-group filter-search">
+
+            <label class="form-label"
+                   for="history-search">
+                Search Crop
+            </label>
+
+            <input class="form-control"
+                   id="history-search"
+                   type="search"
+                   placeholder="Search by crop name">
+
+        </div>
+
+        <div class="filter-group">
+
+            <label class="form-label"
+                   for="history-date">
+                Prediction Date
+            </label>
+
+            <input class="form-control"
+                   id="history-date"
+                   type="date">
+
+        </div>
+
+        <div class="filter-group">
+
+            <label class="form-label"
+                   for="history-confidence">
+                Confidence
+            </label>
+
+            <select class="form-control"
+                    id="history-confidence">
+
+                <option value="all">All ranges</option>
+                <option value="high">High (80%+)</option>
+                <option value="medium">Medium (50–79%)</option>
+                <option value="low">Low (under 50%)</option>
+
+            </select>
+
+        </div>
+
+        <div class="filter-group">
+
+            <label class="form-label"
+                   for="history-sort">
+                Sort By
+            </label>
+
+            <select class="form-control"
+                    id="history-sort">
+
+                <option value="newest">Newest First</option>
+                <option value="oldest">Oldest First</option>
+                <option value="highest">Highest Confidence</option>
+                <option value="lowest">Lowest Confidence</option>
+
+            </select>
+
+        </div>
+
+        <button class="btn btn--outline"
+                type="button"
+                data-clear-filters>
+            Clear Filters
+        </button>
+
+    </section>
+
+    <!-- Table -->
+    <section class="card history-table-card"
+             aria-labelledby="records-title">
+
+        <div class="section-title">
+
+            <div>
+                <p class="eyebrow">Saved recommendations</p>
+                <h2 id="records-title">Prediction Records</h2>
+            </div>
+
+            <span class="text-muted"
+                  data-record-count>
+                Loading…
+            </span>
+
+        </div>
+
+        <div class="table-wrap">
+
+            <table class="data-table">
+
+                <caption class="sr-only">
+                    Crop Prediction History
+                </caption>
+
+                <thead>
+
+                    <tr>
+                        <th scope="col">Prediction ID</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Crop</th>
+                        <th scope="col">Confidence</th>
+                        <th scope="col">Model Version</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">
+                            <span class="sr-only">Actions</span>
+                        </th>
+                    </tr>
+
+                </thead>
+
+                <tbody data-history-table>
+
+                    <tr>
+                        <td colspan="7">
+                            Loading prediction history…
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="history-pagination" data-pagination>
+
+            <div>
+
+                <label for="history-per-page">
+                    Rows Per Page
+                </label>
+
+                <select id="history-per-page"
+                        class="form-control">
+
+                    <option value="10">10</option>
+                    <option value="20" selected>20</option>
+                    <option value="50">50</option>
+
+                </select>
+
+            </div>
+
+            <nav aria-label="History pagination">
+
+                <button type="button"
+                        class="btn btn--outline"
+                        data-page-prev>
+                    Previous
+                </button>
+
+                <span data-page-numbers></span>
+
+                <button type="button"
+                        class="btn btn--outline"
+                        data-page-next>
+                    Next
+                </button>
+
+            </nav>
+
+        </div>
+
+    </section>
+
+    <!-- Empty State -->
+    <section class="card history-empty hidden"
+             data-history-empty
+             aria-labelledby="empty-title">
+
+        <div>
+
+            <span aria-hidden="true">◷</span>
+
+            <h2 id="empty-title">
+                Your prediction history is empty.
+            </h2>
+
+            <p>
+                Once you generate a crop recommendation,
+                it will be saved here for review.
+            </p>
+
+            <a class="btn btn--primary"
+               href="{{ url_for('main.predict') }}">
+                Go to Crop Prediction
+            </a>
+
+        </div>
+
+    </section>
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

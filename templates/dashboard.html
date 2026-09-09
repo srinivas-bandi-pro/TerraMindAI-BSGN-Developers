@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Analytics Dashboard | TerraMind AI
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ url_for('main.home') }}">Home</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Analytics dashboard</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page" aria-labelledby="dashboard-title">
+
+    <!-- Header -->
+    <header class="dashboard-header">
+
+        <div>
+            <p class="eyebrow">Performance overview</p>
+            <h1 id="dashboard-title">Analytics Dashboard</h1>
+            <p>Machine Learning Insights &amp; Prediction Statistics</p>
+        </div>
+
+        <button class="btn btn--outline"
+                type="button"
+                data-dashboard-refresh>
+            Refresh data
+        </button>
+
+    </header>
+
+    <div class="dashboard-alert hidden"
+         data-dashboard-alert
+         role="alert"
+         tabindex="-1">
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="dashboard-kpis" aria-label="Key performance indicators">
+
+        <article class="card stat-card dashboard-kpi" data-skeleton>
+
+            <div>
+                <p class="stat-card__label">Total predictions</p>
+                <p class="stat-card__value" data-kpi-total>—</p>
+            </div>
+
+            <span class="stat-card__icon" aria-hidden="true">↗</span>
+
+        </article>
+
+        <article class="card stat-card dashboard-kpi" data-skeleton>
+
+            <div>
+                <p class="stat-card__label">Predictions today</p>
+                <p class="stat-card__value" data-kpi-today>—</p>
+            </div>
+
+            <span class="stat-card__icon" aria-hidden="true">◷</span>
+
+        </article>
+
+        <article class="card stat-card dashboard-kpi" data-skeleton>
+
+            <div>
+                <p class="stat-card__label">Most predicted crop</p>
+                <p class="stat-card__value crop-value"
+                   data-kpi-crop>—</p>
+            </div>
+
+            <span class="stat-card__icon" aria-hidden="true">♣</span>
+
+        </article>
+
+        <article class="card stat-card dashboard-kpi" data-skeleton>
+
+            <div>
+                <p class="stat-card__label">Model accuracy</p>
+                <p class="stat-card__value" data-kpi-accuracy>—</p>
+            </div>
+
+            <span class="stat-card__icon" aria-hidden="true">◎</span>
+
+        </article>
+
+    </div>
+
+    <!-- Charts -->
+    <div class="dashboard-charts">
+
+        <section class="card chart-card">
+
+            <div class="chart-card__header">
+                <div>
+                    <h2>Prediction distribution</h2>
+                    <p>Crop recommendation frequency</p>
+                </div>
+            </div>
+
+            <div class="chart-wrap">
+
+                <canvas id="distribution-chart"
+                        aria-label="Doughnut chart of crop prediction distribution"
+                        role="img"></canvas>
+
+                <p class="chart-empty hidden"
+                   data-empty-distribution>
+                    No prediction distribution is available yet.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="card chart-card">
+
+            <div class="chart-card__header">
+                <div>
+                    <h2>Prediction trend</h2>
+                    <p>Recent prediction activity</p>
+                </div>
+            </div>
+
+            <div class="chart-wrap">
+
+                <canvas id="trend-chart"
+                        aria-label="Line chart of prediction counts over time"
+                        role="img"></canvas>
+
+            </div>
+
+        </section>
+
+        <section class="card chart-card chart-card--wide">
+
+            <div class="chart-card__header">
+                <div>
+                    <h2>Confidence analysis</h2>
+                    <p>Average confidence by recently predicted crop</p>
+                </div>
+            </div>
+
+            <div class="chart-wrap">
+
+                <canvas id="confidence-chart"
+                        aria-label="Bar chart of average confidence by crop"
+                        role="img"></canvas>
+
+                <p class="chart-empty hidden"
+                   data-empty-confidence>
+                    No confidence information is available yet.
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- Details -->
+    <div class="dashboard-details">
+
+        <!-- Recent Predictions -->
+        <section class="card recent-card"
+                 aria-labelledby="recent-title">
+
+            <div class="section-title">
+
+                <div>
+                    <p class="eyebrow">Latest activity</p>
+                    <h2 id="recent-title">Recent predictions</h2>
+                </div>
+
+                <a class="text-link"
+                   href="{{ url_for('main.history') }}">
+                    View history →
+                </a>
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table class="data-table">
+
+                    <caption class="sr-only">
+                        Most recent crop predictions
+                    </caption>
+
+                    <thead>
+                        <tr>
+                            <th scope="col">Date</th>
+                            <th scope="col">Crop</th>
+                            <th scope="col">Confidence</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody data-recent-predictions>
+
+                        <tr data-table-loading>
+                            <td colspan="4">
+                                Loading recent predictions…
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- Sidebar -->
+        <aside class="dashboard-side">
+
+            <!-- Model Information -->
+            <section class="card"
+                     aria-labelledby="model-title">
+
+                <p class="eyebrow">Model details</p>
+
+                <h2 id="model-title">
+                    Model information
+                </h2>
+
+                <dl class="info-list">
+
+                    <div>
+                        <dt>Algorithm</dt>
+                        <dd data-model-algorithm>—</dd>
+                    </div>
+
+                    <div>
+                        <dt>Version</dt>
+                        <dd data-model-version>—</dd>
+                    </div>
+
+                    <div>
+                        <dt>Training date</dt>
+                        <dd data-model-training>—</dd>
+                    </div>
+
+                    <div>
+                        <dt>Dataset name</dt>
+                        <dd data-model-dataset>—</dd>
+                    </div>
+
+                    <div>
+                        <dt>Features</dt>
+                        <dd data-model-features>—</dd>
+                    </div>
+
+                </dl>
+
+            </section>
+
+            <!-- System Status -->
+            <section class="card"
+                     aria-labelledby="status-title">
+
+                <p class="eyebrow">Service health</p>
+
+                <h2 id="status-title">
+                    System status
+                </h2>
+
+                <div class="status-list">
+
+                    <div>
+                        <span>Backend status</span>
+                        <strong data-status-backend>Checking</strong>
+                    </div>
+
+                    <div>
+                        <span>Database status</span>
+                        <strong data-status-database>Checking</strong>
+                    </div>
+
+                    <div>
+                        <span>Model status</span>
+                        <strong data-status-model>Checking</strong>
+                    </div>
+
+                    <div>
+                        <span>API status</span>
+                        <strong data-status-api>Checking</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </aside>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script defer src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}

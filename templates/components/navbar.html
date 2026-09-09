@@ -1,0 +1,15 @@
+<header class="topbar" role="banner">
+  <div class="topbar__left">
+    <button class="icon-button sidebar-trigger" type="button" data-sidebar-toggle aria-label="Toggle sidebar" aria-expanded="true" aria-controls="app-sidebar">
+      <span class="icon-menu" aria-hidden="true"></span>
+    </button>
+    <a class="brand brand--mobile" href="{{ url_for('main.dashboard') }}" aria-label="TerraMind AI home"><span class="brand__mark">T</span><span>TerraMind</span></a>
+  </div>
+  <nav class="topnav" aria-label="Primary navigation">
+    <a href="{{ url_for('main.home') }}">Home</a><a href="{{ url_for('main.dashboard') }}">Dashboard</a><a href="{{ url_for('main.predict') }}">Prediction</a><a href="{{ url_for('main.history') }}">History</a><a href="{{ url_for('main.dashboard') }}">Analytics</a><a href="{{ url_for('main.about') }}">About</a><a href="{{ url_for('main.contact') }}">Contact</a>
+  </nav>
+  <div class="topbar__actions">
+    <button class="icon-button" type="button" data-theme-toggle aria-label="Switch to dark theme" title="Toggle theme"><span class="icon-theme" aria-hidden="true">◐</span></button>
+    <button class="profile-button" type="button" aria-label="Open user menu" aria-haspopup="menu"><span class="avatar" aria-hidden="true">AS</span><span class="profile-button__text">Account</span><span aria-hidden="true">⌄</span></button>
+  </div>
+</header>

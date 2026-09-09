@@ -1,0 +1,56 @@
+# Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Flask instance files and SQLite databases
+instance/*
+!instance/.gitkeep
+database/*
+!database/.gitkeep
+*.db
+*.sqlite
+*.sqlite3
+
+# Saved trained machine-learning models
+models/*
+!models/.gitkeep
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+.envrc
+
+# Runtime logs
+logs/*
+!logs/.gitkeep
+*.log
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Editor and operating system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Docker and local container tooling
+docker-compose.override.yml
+compose.override.yml
+.docker/
+*.tar
+
+# Jupyter runtime files
+.ipynb_checkpoints/

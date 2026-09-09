@@ -1,0 +1,25 @@
+<!-- TerraMind AI Assistant: reusable site-wide chat widget. -->
+<section class="tm-chat" data-chatbot aria-label="TerraMind AI Assistant">
+  <button class="tm-chat__launcher" type="button" data-chat-toggle aria-expanded="false" aria-controls="tm-chat-panel" aria-label="Open TerraMind AI Assistant">
+    <span aria-hidden="true">✦</span><span class="tm-chat__launcher-label">Ask TerraMind</span>
+  </button>
+  <div class="tm-chat__panel" id="tm-chat-panel" role="dialog" aria-modal="false" aria-labelledby="tm-chat-title" hidden>
+    <header class="tm-chat__header">
+      <span class="tm-chat__avatar" aria-hidden="true">🌱</span>
+      <span><strong id="tm-chat-title">TerraMind AI Assistant</strong><small><i></i> Agriculture expert online</small></span>
+      <select class="tm-chat__language" data-chat-language aria-label="Assistant language"><option value="en">EN</option><option value="hi">हिं</option><option value="te">తె</option></select>
+      <button type="button" class="tm-chat__sound" data-chat-speak aria-label="Enable voice output" aria-pressed="false">🔈</button>
+      <button type="button" class="tm-chat__close" data-chat-toggle aria-label="Close chat">×</button>
+    </header>
+    <div class="tm-chat__messages" data-chat-messages aria-live="polite"></div>
+    <div class="tm-chat__suggestions" data-chat-suggestions>
+      <button type="button">🌾 Recommend Crop</button><button type="button">📅 Best Planting Month</button><button type="button">💧 Irrigation Tips</button><button type="button">🌱 Fertilizer Advice</button><button type="button">🐛 Disease Detection</button><button type="button">🌦 Weather</button><button type="button">📚 Farming Tips</button>
+    </div>
+    <form class="tm-chat__composer" data-chat-form>
+      <button class="tm-chat__voice" type="button" data-chat-voice aria-label="Use voice input">🎙</button>
+      <input data-chat-input autocomplete="off" maxlength="600" placeholder="Ask about your farm…" aria-label="Your farming question">
+      <button class="tm-chat__send" type="submit" aria-label="Send message">➜</button>
+    </form>
+    <p class="tm-chat__notice">Agriculture guidance only • Verify treatments locally</p>
+  </div>
+</section>

@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create Account | Terra Mind AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+</head>
+<body class="auth-body">
+  <div class="auth-wrapper">
+    <!-- Full Realistic Agricultural Landscape Backdrop -->
+    <div class="auth-bg-layer" style="background-image: url('{{ url_for('auth.bg_reference') }}');"></div>
+    <div class="auth-bg-overlay"></div>
+
+
+    <!-- Top Header Bar -->
+    <header class="auth-header">
+      <div class="header-left">
+        <!-- Circular BSGN DEVELOPERS Logo Emblem -->
+        <div class="bsgn-logo-container">
+          <svg class="bsgn-logo-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="100" r="94" fill="#ffffff" stroke="#0066cc" stroke-width="4"/>
+            <circle cx="100" cy="100" r="88" fill="none" stroke="#00a859" stroke-width="2.5" stroke-dasharray="6,3"/>
+            <!-- Top AI chip node -->
+            <rect x="85" y="16" width="30" height="20" rx="4" fill="#ffffff" stroke="#0066cc" stroke-width="2"/>
+            <text x="100" y="30" font-family="Manrope, sans-serif" font-weight="800" font-size="10" fill="#0066cc" text-anchor="middle">AI</text>
+            <circle cx="76" cy="26" r="3" fill="#00a859"/>
+            <circle cx="124" cy="26" r="3" fill="#00a859"/>
+            <!-- Leaf accent on top right border -->
+            <path d="M162,28 Q182,22 178,42 Q158,48 162,28 Z" fill="#00a859"/>
+            <path d="M170,35 Q186,40 178,52 Q163,48 170,35 Z" fill="#7ed957"/>
+
+            <!-- Main Text BSGN DEVELOPERS -->
+            <text x="100" y="86" font-family="Manrope, sans-serif" font-weight="900" font-size="36" fill="#0c1938" text-anchor="middle" letter-spacing="-0.5">BSGN</text>
+            <text x="100" y="108" font-family="Manrope, sans-serif" font-weight="800" font-size="14" fill="#00a859" text-anchor="middle" letter-spacing="1.5">DEVELOPERS</text>
+            
+            <!-- Banner text -->
+            <line x1="25" y1="117" x2="175" y2="117" stroke="#00a859" stroke-width="1"/>
+            <text x="100" y="125" font-family="Manrope, sans-serif" font-weight="700" font-size="7" fill="#0066cc" text-anchor="middle" letter-spacing="0.5">— SMART AGRI • GREEN FUTURE —</text>
+            
+            <!-- Bottom Graphic: Hills, Tractor, Sun, Trees -->
+            <path d="M 20,165 Q 60,135 100,155 Q 140,135 180,165 A 88,88 0 0,1 20,165 Z" fill="#009944"/>
+            <path d="M 40,165 Q 80,145 120,160 Q 160,145 180,165 A 88,88 0 0,1 40,165 Z" fill="#006622"/>
+            <circle cx="100" cy="148" r="12" fill="#ffd700" opacity="0.8"/>
+            <path d="M125,152 h10 v-6 h-6 v-4 h-6 v10 Z" fill="#0066cc"/>
+            <circle cx="127" cy="155" r="3" fill="#333"/>
+            <circle cx="134" cy="155" r="4.5" fill="#333"/>
+          </svg>
+        </div>
+
+        <!-- Terra Mind AI Header Title -->
+        <div class="brand-title-group">
+          <div class="brand-title-row">
+            <h1 class="brand-title">Terra Mind <span class="ai-green">AI</span></h1>
+            <svg class="brand-leaf-icon" viewBox="0 0 32 32" width="28" height="28" fill="none">
+              <path d="M16 4C9 4 4 9 4 16C4 23 9 28 16 28C23 28 28 23 28 16C28 9 23 4 16 4Z" fill="none"/>
+              <path d="M22 8C16 8 12 12 10 18C8 12 4 8 -1 8" stroke="#00a859"/>
+              <path d="M22 8C15 8 11 14 11 22C11 22 17 22 22 17C24.5 14 24 11 22 8Z" fill="#00a859"/>
+              <path d="M11 22C11 15 15 11 22 8C22 8 22 15 17 19C13.5 21.5 11.5 21.5 11 22Z" fill="#7ed957"/>
+            </svg>
+          </div>
+          <p class="brand-subtitle">Smart Agriculture for a Sustainable Tomorrow</p>
+        </div>
+      </div>
+
+      <!-- Top Right Dark Mode Button -->
+      <button type="button" class="dark-mode-pill" id="darkModeToggle" data-auth-theme>
+        <svg class="moon-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4C12.92 3.04 12.46 3 12 3z"/>
+        </svg>
+        <span>Dark Mode</span>
+      </button>
+    </header>
+
+    <!-- Top Right Floating Quote -->
+    <div class="top-right-quote">
+      <div class="quote-line">"Healthy</div>
+      <div class="quote-line">Soil</div>
+      <div class="quote-line">Brighter</div>
+      <div class="quote-line quote-underline">Tomorrows"</div>
+    </div>
+
+    <!-- Main Content Area: 60% Left / 40% Right Grid -->
+    <div class="auth-main-grid">
+      <!-- LEFT SECTION (~60%) -->
+      <div class="left-section">
+        <!-- AI Powered Banner -->
+        <div class="banner-pill">
+          <span>AI POWERED CROP RECOMMENDATION</span>
+        </div>
+
+        <!-- 5 Feature Icons Row -->
+        <div class="features-row">
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <svg viewBox="0 0 36 36" width="30" height="30" fill="none">
+                <path d="M18 6C12 6 8 11 8 17C8 23 18 31 18 31C18 31 28 23 28 17C28 11 24 6 18 6Z" fill="#e6f7ed"/>
+                <path d="M18 10C14 10 11 13 11 17C11 21 18 27 18 27C18 27 25 21 25 17C25 13 22 10 18 10Z" stroke="#008844" stroke-width="2"/>
+                <path d="M18 14V20M15 17H21" stroke="#008844" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="feature-label">SOIL<br>ANALYSIS</div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <svg viewBox="0 0 36 36" width="30" height="30" fill="none">
+                <path d="M11 20C8.8 20 7 18.2 7 16C7 14.1 8.3 12.5 10.1 12.1C10.7 9.2 13.2 7 16.3 7C19.9 7 22.9 9.8 23.2 13.4C25.3 13.8 27 15.7 27 18C27 20.8 24.8 23 22 23H11" stroke="#008844" stroke-width="2" stroke-linecap="round"/>
+                <path d="M12 25L10 29M17 25L15 29M22 25L20 29" stroke="#008844" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="feature-label">WEATHER<br>DATA</div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <svg viewBox="0 0 36 36" width="30" height="30" fill="none">
+                <rect x="9" y="9" width="18" height="18" rx="4" stroke="#008844" stroke-width="2"/>
+                <path d="M14 5V9M22 5V9M14 27V31M22 27V31M5 14H9M5 22H9M27 14H31M27 22H31" stroke="#008844" stroke-width="2" stroke-linecap="round"/>
+                <text x="18" y="21" font-family="Manrope" font-weight="900" font-size="10" fill="#008844" text-anchor="middle">AI</text>
+              </svg>
+            </div>
+            <div class="feature-label">AI<br>PREDICTION</div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <svg viewBox="0 0 36 36" width="30" height="30" fill="none">
+                <path d="M18 29V15M18 15C18 15 11 12 11 6C17 6 18 15 18 15ZM18 19C18 19 25 16 25 10C19 10 18 19 18 19Z" stroke="#008844" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="feature-label">BEST CROP<br>SUGGESTION</div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-circle">
+              <svg viewBox="0 0 36 36" width="30" height="30" fill="none">
+                <path d="M7 27H29" stroke="#008844" stroke-width="2" stroke-linecap="round"/>
+                <rect x="9" y="19" width="4" height="8" rx="1" fill="#008844"/>
+                <rect x="16" y="14" width="4" height="13" rx="1" fill="#008844"/>
+                <rect x="23" y="9" width="4" height="18" rx="1" fill="#008844"/>
+                <path d="M9 14L16 9L26 5M26 5H21M26 5V10" stroke="#008844" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="feature-label">HIGHER<br>YIELD</div>
+          </div>
+        </div>
+
+        <!-- Tagline under 5 icons -->
+        <div class="feature-tagline">
+          Right Crop &nbsp;|&nbsp; Right Soil &nbsp;|&nbsp; Better Yield &nbsp;|&nbsp; Greener Future
+        </div>
+
+        <!-- Middle Left Visual Stage -->
+        <div class="left-center-visual">
+          <!-- Hand Holding Smartphone Mockup -->
+          <div class="phone-mockup">
+            <div class="hand-graphic"></div>
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-header">
+                <div class="phone-title-group">
+                  <span class="leaf-dot">🌱</span>
+                  <span class="phone-brand">Terra Mind <small class="ai-txt">AI</small></span>
+                </div>
+                <div class="phone-sub">Crop Recommendation</div>
+              </div>
+              <div class="phone-body">
+                <div class="phone-card-title">Best Suitable Crops</div>
+                
+                <div class="phone-crop-card">
+                  <div class="crop-icon">🌾</div>
+                  <div class="crop-info">
+                    <div class="crop-name">Rice</div>
+                    <div class="crop-match match-high">90% Suitable</div>
+                  </div>
+                </div>
+
+                <div class="phone-crop-card">
+                  <div class="crop-icon">🌽</div>
+                  <div class="crop-info">
+                    <div class="crop-name">Maize</div>
+                    <div class="crop-match match-high">88% Suitable</div>
+                  </div>
+                </div>
+
+                <div class="phone-crop-card">
+                  <div class="crop-icon">☁️</div>
+                  <div class="crop-info">
+                    <div class="crop-name">Cotton</div>
+                    <div class="crop-match match-med">78% Suitable</div>
+                  </div>
+                </div>
+
+                <button class="phone-btn" type="button">View Details</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empowering Farmers Script Text -->
+          <div class="script-overlay-text">
+            <div class="script-line script-line-1">Empowering</div>
+            <div class="script-line script-line-2">Farmers with</div>
+            <div class="script-line script-line-3">Intelligent Solutions</div>
+          </div>
+
+          <!-- Farmer Visual Graphic -->
+          <div class="farmer-visual-container">
+            <svg class="farmer-svg" viewBox="0 0 120 180" width="90" height="135" fill="none">
+              <path d="M20,40 Q60,10 100,40 Q115,48 105,52 Q60,35 15,52 Q5,48 20,40 Z" fill="#d97706"/>
+              <ellipse cx="60" cy="38" rx="26" ry="12" fill="#b45309"/>
+              <circle cx="60" cy="46" r="10" fill="#f59e0b"/>
+              <path d="M38,60 Q60,55 82,60 L92,130 Q60,135 28,130 Z" fill="#92400e"/>
+              <path d="M38,60 L20,100 L30,102 L44,70 Z" fill="#78350f"/>
+              <path d="M82,60 L100,100 L90,102 L76,70 Z" fill="#78350f"/>
+            </svg>
+          </div>
+
+          <!-- Glowing AI Plant Hologram Visual -->
+          <div class="ai-plant-hologram">
+            <div class="plant-stem">
+              <svg viewBox="0 0 60 80" width="50" height="65" fill="none">
+                <path d="M30 75 Q 30 45 30 20" stroke="#34d399" stroke-width="4" stroke-linecap="round"/>
+                <path d="M30 50 Q 10 40 5 25 Q 20 25 30 45" fill="#10b981"/>
+                <path d="M30 35 Q 50 25 55 10 Q 40 10 30 30" fill="#34d399"/>
+              </svg>
+            </div>
+            <div class="soil-mound"></div>
+            <div class="holo-ring ring-1"></div>
+            <div class="holo-ring ring-2"></div>
+            <div class="holo-ring ring-3"></div>
+            
+            <!-- Connected Nodes -->
+            <div class="holo-node node-sun" title="Solar Radiation">☀️</div>
+            <div class="holo-node node-water" title="Soil Moisture">💧</div>
+            <div class="holo-node node-temp" title="Temperature">🌡️</div>
+            <div class="holo-node node-cloud" title="Humidity & Weather">☁️</div>
+            <div class="holo-node node-leaf" title="Plant Health">🍃</div>
+          </div>
+        </div>
+
+        <!-- Bottom Left Statistics Bar -->
+        <div class="stats-bar">
+          <div class="stat-box">
+            <div class="stat-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6ee7b7" stroke-width="2">
+                <rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9z"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-number">10K+</div>
+              <div class="stat-label">AI Predictions</div>
+            </div>
+          </div>
+
+          <div class="stat-divider"></div>
+
+          <div class="stat-box">
+            <div class="stat-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6ee7b7" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-number">5K+</div>
+              <div class="stat-label">Happy Farmers</div>
+            </div>
+          </div>
+
+          <div class="stat-divider"></div>
+
+          <div class="stat-box">
+            <div class="stat-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6ee7b7" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-number">25+</div>
+              <div class="stat-label">Crops Analyzed</div>
+            </div>
+          </div>
+
+          <div class="stat-divider"></div>
+
+          <div class="stat-box">
+            <div class="stat-icon-wrapper">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#6ee7b7" stroke-width="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+              </svg>
+            </div>
+            <div class="stat-content">
+              <div class="stat-number">95%</div>
+              <div class="stat-label">Prediction Accuracy</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SECTION (~40%) -->
+      <div class="right-section">
+        <div class="login-card-container">
+          <div class="login-card register-card">
+            <!-- Top Leaf Icon -->
+            <div class="card-top-icon">
+              <svg viewBox="0 0 40 40" width="42" height="42" fill="none">
+                <path d="M20 4C11 4 4 11 4 20C4 29 11 36 20 36C29 36 36 29 36 20C36 11 29 4 20 4Z" fill="#e6f7ed"/>
+                <path d="M26 12C20 12 15 16 13 22C11 16 6 12 0 12" fill="none"/>
+                <path d="M26 12C18 12 14 18 14 26C14 26 21 26 26 20C29 16.5 28.5 13.5 26 12Z" fill="#00a859"/>
+                <path d="M14 26C14 18 18 14 26 12C26 12 26 19 20 23C16.5 25.5 14.5 25.5 14 26Z" fill="#7ed957"/>
+              </svg>
+            </div>
+
+            <h2 class="card-title">Create <span class="title-bold">Account</span> <span class="sprout-emoji">🌱</span></h2>
+            
+            <p class="card-subtitle-1">Start your <strong class="highlight-green">Terra Mind AI</strong> journey</p>
+            <p class="card-subtitle-2">Smart Agriculture for a Sustainable Tomorrow</p>
+
+            <!-- Flashed Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                <div class="flashed-messages">
+                  {% for category, message in messages %}
+                    <div class="auth-alert alert-{{ category }}">{{ message }}</div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endwith %}
+
+            <!-- Registration Form -->
+            <form method="post" action="{{ url_for('auth.register') }}" class="login-form" novalidate>
+              <!-- Full Name Input Field -->
+              <div class="form-group form-group-compact">
+                <label for="name" class="form-label">Full Name</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748b" stroke-width="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                      <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                  </span>
+                  <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" autocomplete="name" required>
+                </div>
+              </div>
+
+              <!-- Username Input Field -->
+              <div class="form-group form-group-compact">
+                <label for="username" class="form-label">Username</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748b" stroke-width="2">
+                      <circle cx="12" cy="12" r="4"/>
+                      <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"/>
+                    </svg>
+                  </span>
+                  <input type="text" id="username" name="username" class="form-input" placeholder="Choose a username" autocomplete="username" required>
+                </div>
+              </div>
+
+              <!-- Email Input Field -->
+              <div class="form-group form-group-compact">
+                <label for="email" class="form-label">Email Address</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748b" stroke-width="2">
+                      <rect x="2" y="4" width="20" height="16" rx="2"/>
+                      <path d="M22 6l-10 7L2 6"/>
+                    </svg>
+                  </span>
+                  <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" autocomplete="email" required>
+                </div>
+              </div>
+
+              <!-- Password Input Field -->
+              <div class="form-group form-group-compact">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748b" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                  </span>
+                  <input type="password" id="password" name="password" class="form-input password-input" placeholder="Create a password (min. 8 chars)" autocomplete="new-password" minlength="8" required>
+                  <button type="button" class="eye-toggle-btn" aria-label="Toggle password visibility">
+                    <svg class="eye-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748b" stroke-width="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Confirm Password Input Field -->
+              <div class="form-group form-group-compact">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748b" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                  </span>
+                  <input type="password" id="confirm_password" name="confirm_password" class="form-input password-input" placeholder="Confirm your password" autocomplete="new-password" minlength="8" required>
+                  <button type="button" class="eye-toggle-btn" aria-label="Toggle password visibility">
+                    <svg class="eye-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#64748b" stroke-width="2">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                      <circle cx="12" cy="12" r="3"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Role Note -->
+              <p class="role-note">
+                Role: <b>User</b> — Administrator access is assigned securely.
+              </p>
+
+              <!-- Create Account Primary Submit Button -->
+              <button type="submit" class="btn-primary-login">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/>
+                </svg>
+                <span>Create Account</span>
+              </button>
+
+              <!-- Link back to Login -->
+              <a href="{{ url_for('auth.login') }}" class="btn-secondary-create">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/>
+                </svg>
+                <span>Already have an account? Sign In</span>
+              </a>
+
+              <!-- Enterprise Security Footer Badge -->
+              <div class="card-security-badge">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#00a859" stroke-width="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M9 12l2 2 4-4"/>
+                </svg>
+                <span>Your data is safe and secure with enterprise-grade security.</span>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Right Slogan Quote -->
+    <div class="bottom-right-slogan">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#00a859"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22C7.57 17.36 9.4 12.8 17 11V16L23 9.5L17 3V8Z"/></svg>
+      <span>"Grow Smarter &nbsp;Live Better"</span>
+    </div>
+
+    <!-- Bottom Footer Bar -->
+    <footer class="auth-footer-bar">
+      <span>© 2026 BSGN Developers &nbsp;|&nbsp; Terra Mind AI &nbsp;|&nbsp; Smart Agriculture for a Sustainable Tomorrow</span>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

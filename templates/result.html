@@ -1,0 +1,295 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Prediction Result | TerraMind AI
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/result.css') }}">
+{% endblock %}
+
+{% block breadcrumbs %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+    <a href="{{ url_for('main.home') }}">Home</a>
+    <span aria-hidden="true">/</span>
+    <a href="{{ url_for('main.predict') }}">Crop Prediction</a>
+    <span aria-hidden="true">/</span>
+    <span aria-current="page">Result</span>
+</nav>
+{% endblock %}
+
+{% block content %}
+
+<section class="result-page" aria-labelledby="result-page-title">
+
+    <!-- Header -->
+    <header class="result-page__header">
+
+        <p class="eyebrow">
+            Machine Learning Recommendation
+        </p>
+
+        <h1 id="result-page-title">
+            Prediction Result
+        </h1>
+
+        <p>
+            Machine Learning Recommendation
+        </p>
+
+    </header>
+
+    <div class="form-alert hidden"
+         data-result-error
+         role="alert"
+         tabindex="-1">
+    </div>
+
+    <div data-result-content class="hidden">
+
+        <div class="result-layout">
+
+            <!-- Main Content -->
+            <div class="result-main">
+
+                <!-- Prediction Card -->
+                <section class="card result-hero"
+                         aria-labelledby="prediction-card-title">
+
+                    <div class="result-hero__top">
+
+                        <div>
+                            <p class="eyebrow">
+                                Recommended Crop
+                            </p>
+
+                            <h2 id="prediction-card-title">
+                                Your Best Crop Match
+                            </h2>
+                        </div>
+
+                        <span class="result-status">
+                            Prediction Complete
+                        </span>
+
+                    </div>
+
+                    <div class="result-summary">
+
+                        <span class="result-summary__icon"
+                              aria-hidden="true">
+                            ♣
+                        </span>
+
+                        <div>
+                            <strong data-crop-name>—</strong>
+                            <span>Predicted Crop</span>
+                        </div>
+
+                        <div class="result-confidence">
+                            <span>Confidence Score</span>
+                            <strong data-confidence>—</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="progress"
+                         aria-label="Prediction confidence">
+
+                        <div class="progress__bar"
+                             data-confidence-bar
+                             style="width:0%">
+                        </div>
+
+                    </div>
+
+                    <div class="result-metadata">
+
+                        <div>
+                            <span>Prediction Timestamp</span>
+                            <strong data-timestamp>—</strong>
+                        </div>
+
+                        <div>
+                            <span>Model Version</span>
+                            <strong data-model-version>—</strong>
+                        </div>
+
+                        <div>
+                            <span>Algorithm</span>
+                            <strong data-algorithm>—</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- Alternatives -->
+                <section aria-labelledby="alternatives-title">
+
+                    <div class="section-title">
+
+                        <p class="eyebrow">
+                            Other Possibilities
+                        </p>
+
+                        <h2 id="alternatives-title">
+                            Alternative Recommendations
+                        </h2>
+
+                    </div>
+
+                    <div class="alternative-grid"
+                         data-alternatives>
+                    </div>
+
+                </section>
+
+                <!-- Input Summary -->
+                <section class="card"
+                         aria-labelledby="input-title">
+
+                    <p class="eyebrow">
+                        Your Submitted Data
+                    </p>
+
+                    <h2 id="input-title">
+                        Input Summary
+                    </h2>
+
+                    <div class="input-summary mt-2"
+                         data-input-summary>
+                    </div>
+
+                </section>
+
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="recommendation-panel card"
+                   aria-labelledby="recommendation-title">
+
+                <p class="eyebrow">
+                    Planning Prompts
+                </p>
+
+                <h2 id="recommendation-title">
+                    Recommendation Notes
+                </h2>
+
+                <p>
+                    These general reminders support planning and are
+                    not crop-specific guidance.
+                </p>
+
+                <div class="recommendation-item">
+
+                    <span aria-hidden="true">☀</span>
+
+                    <div>
+                        <h3>Suitable Growing Conditions</h3>
+                        <p>
+                            Review local seasonal conditions and choose
+                            planting windows that suit your farm plan.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="recommendation-item">
+
+                    <span aria-hidden="true">≈</span>
+
+                    <div>
+                        <h3>General Irrigation Advice</h3>
+                        <p>
+                            Monitor field moisture regularly and adjust
+                            irrigation according to observed conditions.
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="recommendation-item">
+
+                    <span aria-hidden="true">⌁</span>
+
+                    <div>
+                        <h3>General Soil Guidance</h3>
+                        <p>
+                            Use recent soil testing and local agricultural
+                            experts when preparing your field.
+                        </p>
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+        <!-- Action Buttons -->
+        <nav class="result-actions mt-3"
+             aria-label="Prediction Result Actions">
+
+            <a class="btn btn--primary"
+               href="{{ url_for('main.predict') }}">
+                Predict Again
+            </a>
+
+            <a class="btn btn--outline"
+               href="{{ url_for('main.history') }}">
+                View History
+            </a>
+
+            <a class="btn btn--outline"
+               href="{{ url_for('main.dashboard') }}">
+                Go to Dashboard
+            </a>
+
+            <a class="btn btn--outline"
+               href="{{ url_for('main.home') }}">
+                Back to Home
+            </a>
+
+        </nav>
+
+    </div>
+
+    <!-- Empty Result -->
+    <section class="card empty-result hidden"
+             data-empty-result
+             aria-labelledby="empty-result-title">
+
+        <div>
+
+            <span class="empty-result__icon"
+                  aria-hidden="true">
+                ✦
+            </span>
+
+            <h2 id="empty-result-title">
+                No Prediction to Display Yet
+            </h2>
+
+            <p>
+                Make a crop prediction first and your latest result
+                will be shown here.
+            </p>
+
+            <a class="btn btn--primary"
+               href="{{ url_for('main.predict') }}">
+                Go to Prediction Page
+            </a>
+
+        </div>
+
+    </section>
+
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/result.js') }}"></script>
+{% endblock %}

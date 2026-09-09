@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Crop Prediction | TerraMind AI{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{{ url_for('static', filename='css/predict.css') }}">{% endblock %}
+
+{% block breadcrumbs %}<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{{ url_for('main.home') }}">Home</a><span aria-hidden="true">/</span><span aria-current="page">Crop prediction</span></nav>{% endblock %}
+
+{% block content %}
+<section class="prediction-page" aria-labelledby="prediction-title">
+  <header class="page-header"><p class="eyebrow">Machine learning recommendation</p><h1 id="prediction-title">Crop Prediction</h1><p>Predict the most suitable crop using Machine Learning.</p></header>
+  <div class="prediction-layout">
+    <section class="card prediction-form-card" aria-labelledby="form-title">
+      <div class="card-heading"><div><h2 id="form-title">Field conditions</h2><p>Enter the latest soil and weather measurements for your field.</p></div><span class="card-heading__icon" aria-hidden="true">⌁</span></div>
+      <div class="alert prediction-notice" role="note"><span aria-hidden="true">i</span><div><strong>Use accurate measurements</strong><p>Complete every field to receive the most useful recommendation.</p></div></div>
+      <div class="form-alert hidden" data-form-alert role="alert" tabindex="-1"></div>
+      <form id="prediction-form" novalidate aria-describedby="form-help">
+        <p id="form-help" class="sr-only">All fields are required and accept numeric values only.</p>
+        <fieldset><legend>Soil nutrients</legend><div class="form-grid">
+          <div class="form-group"><label class="form-label" for="nitrogen">Nitrogen (N) <span aria-hidden="true">*</span></label><input class="form-control" id="nitrogen" name="N" type="number" inputmode="decimal" min="0" max="200" step="any" required aria-describedby="nitrogen-hint nitrogen-error"><small id="nitrogen-hint">Range: 0–200</small><span class="form-error" id="nitrogen-error"></span></div>
+          <div class="form-group"><label class="form-label" for="phosphorus">Phosphorus (P) <span aria-hidden="true">*</span></label><input class="form-control" id="phosphorus" name="P" type="number" inputmode="decimal" min="0" max="200" step="any" required aria-describedby="phosphorus-hint phosphorus-error"><small id="phosphorus-hint">Range: 0–200</small><span class="form-error" id="phosphorus-error"></span></div>
+          <div class="form-group"><label class="form-label" for="potassium">Potassium (K) <span aria-hidden="true">*</span></label><input class="form-control" id="potassium" name="K" type="number" inputmode="decimal" min="0" max="200" step="any" required aria-describedby="potassium-hint potassium-error"><small id="potassium-hint">Range: 0–200</small><span class="form-error" id="potassium-error"></span></div>
+        </div></fieldset>
+        <fieldset><legend>Weather and soil profile</legend><div class="form-grid form-grid--two">
+          <div class="form-group"><label class="form-label" for="temperature">Temperature (°C) <span aria-hidden="true">*</span></label><input class="form-control" id="temperature" name="temperature" type="number" inputmode="decimal" min="-10" max="60" step="any" required aria-describedby="temperature-hint temperature-error"><small id="temperature-hint">Range: -10–60°C</small><span class="form-error" id="temperature-error"></span></div>
+          <div class="form-group"><label class="form-label" for="humidity">Humidity (%) <span aria-hidden="true">*</span></label><input class="form-control" id="humidity" name="humidity" type="number" inputmode="decimal" min="0" max="100" step="any" required aria-describedby="humidity-hint humidity-error"><small id="humidity-hint">Range: 0–100%</small><span class="form-error" id="humidity-error"></span></div>
+          <div class="form-group"><label class="form-label" for="ph">pH <span aria-hidden="true">*</span></label><input class="form-control" id="ph" name="ph" type="number" inputmode="decimal" min="0" max="14" step="any" required aria-describedby="ph-hint ph-error"><small id="ph-hint">Range: 0–14</small><span class="form-error" id="ph-error"></span></div>
+          <div class="form-group"><label class="form-label" for="rainfall">Rainfall (mm) <span aria-hidden="true">*</span></label><input class="form-control" id="rainfall" name="rainfall" type="number" inputmode="decimal" min="0" max="500" step="any" required aria-describedby="rainfall-hint rainfall-error"><small id="rainfall-hint">Range: 0–500 mm</small><span class="form-error" id="rainfall-error"></span></div>
+        </div></fieldset>
+        <div class="form-actions"><button class="btn btn--primary" type="submit" data-submit><span data-submit-text>Predict crop</span><span class="spinner hidden" data-submit-spinner aria-hidden="true"></span></button><button class="btn btn--outline" type="reset">Reset form</button></div>
+      </form>
+    </section>
+    <aside class="prediction-sidebar" aria-label="Prediction result">
+      <section class="card prediction-card result-card hidden" data-result-card aria-live="polite" aria-labelledby="result-title" tabindex="-1">
+        <p class="eyebrow">Your recommendation</p><h2 id="result-title">Best crop match</h2><div class="result-crop"><span class="result-crop__icon" aria-hidden="true">♣</span><div><strong data-result-crop>—</strong><span>Predicted crop</span></div></div><div class="confidence"><div><span>Confidence</span><strong data-result-confidence>0%</strong></div><div class="progress" aria-label="Prediction confidence"><div class="progress__bar" data-confidence-bar style="width:0%"></div></div></div><div class="result-details"><div><span>Model version</span><strong data-result-version>—</strong></div><div><span>Predicted at</span><strong data-result-time>—</strong></div></div><h3>Top recommendations</h3><ol class="recommendation-list" data-recommendations></ol><button type="button" class="btn btn--outline btn--sm" data-ask-ai-crop style="margin-top: 1rem; width: 100%;">🌱 Ask AI Assistant about this crop</button></section>
+      <section class="card result-placeholder" data-result-placeholder aria-labelledby="preview-title"><span class="result-placeholder__icon" aria-hidden="true">✦</span><h2 id="preview-title">Your result will appear here</h2><p>Submit your field conditions to get a data-informed crop recommendation.</p></section>
+      <section class="help-card" aria-labelledby="help-title"><span aria-hidden="true">?</span><div><h2 id="help-title">Need a refresher?</h2><p>Use recent soil-test and local weather readings for the best input quality.</p></div></section>
+    </aside>
+  </div>
+</section>
+{% endblock %}
+{% block extra_js %}<script src="{{ url_for('static', filename='js/predict.js') }}"></script>{% endblock %}

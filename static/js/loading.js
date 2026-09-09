@@ -1,0 +1,1 @@
+(function () { document.addEventListener('DOMContentLoaded', function () { const loader = document.querySelector('[data-page-loader]'); window.setTimeout(function () { loader?.classList.add('is-hidden'); }, 180); }); }());

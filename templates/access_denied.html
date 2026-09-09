@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Access Denied | TerraMind AI{% endblock %}
+{% block content %}
+<section class="profile-page" aria-labelledby="access-denied-title">
+  <div class="profile-card">
+    <p class="eyebrow">RESTRICTED AREA</p>
+    <h1 id="access-denied-title">Access denied</h1>
+    <p>Only administrators can upload and activate trained models.</p>
+    <a class="button button--primary" href="{{ url_for('main.dashboard') }}">Return to dashboard</a>
+  </div>
+</section>
+{% endblock %}
