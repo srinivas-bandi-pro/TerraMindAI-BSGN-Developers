@@ -2,7 +2,6 @@
 
 import logging
 import os
-import shutil
 from urllib.parse import urljoin, urlparse
 
 from flask import Blueprint, current_app, flash, redirect, render_template, request, send_file, url_for
@@ -14,31 +13,14 @@ from app.services.auth_service import AuthService, AuthenticationError
 auth_blueprint = Blueprint("auth", __name__)
 LOGGER = logging.getLogger(__name__)
 
-# Ensure reference image is copied to static folder immediately
-REF_IMAGE_SRC = r"C:\Users\bandi\.gemini\antigravity\brain\28084483-d022-46c8-8041-51dbd0191359\.user_uploaded\media_1788892009610.jpg"
-STATIC_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "static"))
-STATIC_BG_DEST = os.path.join(STATIC_DIR, "images", "ref_bg.jpg")
-
-try:
-    if os.path.exists(REF_IMAGE_SRC):
-        os.makedirs(os.path.dirname(STATIC_BG_DEST), exist_ok=True)
-        shutil.copy(REF_IMAGE_SRC, STATIC_BG_DEST)
-except Exception as _err:
-    LOGGER.warning("Could not copy reference background image on import: %s", _err)
-
 
 @auth_blueprint.route("/bg-reference.jpg")
 def bg_reference():
-    """Serve the reference background image."""
-    if os.path.exists(REF_IMAGE_SRC):
-        return send_file(REF_IMAGE_SRC, mimetype="image/jpeg")
-    if os.path.exists(STATIC_BG_DEST):
-        return send_file(STATIC_BG_DEST, mimetype="image/jpeg")
+    """Serve the reference background image from static folder."""
+    static_bg = os.path.join(current_app.static_folder, "images", "ref_bg.jpg")
+    if os.path.exists(static_bg):
+        return send_file(static_bg, mimetype="image/jpeg")
     return "", 404
-
-
-
-
 
 
 def _safe_next_url(target: str | None) -> str | None:
@@ -53,10 +35,6 @@ def _safe_next_url(target: str | None) -> str | None:
 @auth_blueprint.route("/login", methods=("GET", "POST"))
 def login():
     """Sign an existing user into a Flask-Login session."""
-    if current_user.is_authenticated:
-        if current_user.is_admin:
-            return redirect(url_for("main.model_info"))
-        return redirect(url_for("main.dashboard"))
     if request.method == "POST":
         identifier = request.form.get("email", "").strip()
         password = request.form.get("password", "")
@@ -86,8 +64,6 @@ def login():
 @auth_blueprint.route("/register", methods=("GET", "POST"))
 def register():
     """Create a standard user account and immediately sign it in."""
-    if current_user.is_authenticated:
-        return redirect(url_for("main.dashboard"))
     if request.method == "POST":
         name = request.form.get("name", "").strip()
         email = request.form.get("email", "").strip().lower()
@@ -165,3 +141,17 @@ def change_password():
             flash("Your password has been updated.", "success")
             return redirect(url_for("auth.profile"))
     return render_template("change_password.html")
+
+
+@auth_blueprint.route("/activate")
+@auth_blueprint.route("/activate/<token>")
+@auth_blueprint.route("/verify")
+@auth_blueprint.route("/verify/<token>")
+@auth_blueprint.route("/verify-email")
+@auth_blueprint.route("/activate-account")
+@auth_blueprint.route("/confirm-email")
+@auth_blueprint.route("/confirm/<token>")
+def handle_obsolete_activation(token: str | None = None):
+    """Safely handle stale or legacy activation link visits without showing activation errors."""
+    flash("Account activation is not required. Your account is active and ready for sign in.", "info")
+    return redirect(url_for("auth.login"))

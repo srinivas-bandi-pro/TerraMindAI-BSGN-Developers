@@ -14,13 +14,17 @@ instance/*
 !instance/.gitkeep
 database/*
 !database/.gitkeep
-*.db
+!database/agrismart.db
 *.sqlite
 *.sqlite3
 
 # Saved trained machine-learning models
 models/*
 !models/.gitkeep
+!models/best_model.pkl
+!models/model_metadata.json
+!data/processed/label_encoder.pkl
+!data/processed/scaler.pkl
 
 # Environment variables and secrets
 .env

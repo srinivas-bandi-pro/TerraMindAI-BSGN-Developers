@@ -16,6 +16,15 @@ def home():
     return redirect(url_for("auth.login"))
 
 
+@main_blueprint.get("/favicon.ico")
+def favicon():
+    """Serve a clean inline SVG leaf favicon for browser requests."""
+    from flask import Response
+    svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🌱</text></svg>'
+    return Response(svg, mimetype="image/svg+xml")
+
+
+
 @main_blueprint.get("/health")
 def health():
     """Return database and model health information."""
