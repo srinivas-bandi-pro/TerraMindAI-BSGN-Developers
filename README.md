@@ -99,8 +99,8 @@ portfolio. Replace each placeholder below with the matching captured image.
 
 ## Folder Structure
 
-```text
-agrismart-ai/
+TerraMind AI```text
+
 |-- app/                       # Flask package: routes, services, models, utilities
 |   |-- ml/                    # Dataset, preprocessing, training, evaluation modules
 |   |-- models/                # SQLAlchemy data models
