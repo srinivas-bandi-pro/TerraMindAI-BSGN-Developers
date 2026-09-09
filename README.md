@@ -131,8 +131,8 @@ agrismart-ai/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/<your-username>/agrismart-ai.git
-cd agrismart-ai
+git clone https://github.com/srinivas-bandi-pro/TerraMindAI-BSGN-Developers.git
+cd TerraMindAI-BSGN-Developers
 ```
 
 ### 2. Create a virtual environment
@@ -292,8 +292,8 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Author
 
-**Author:** Placeholder
+**Author:** Bandi Srinivas
 
-**Institution / Organization:** Placeholder
+**Institution / Organization:** BSGN Developers
 
-**Contact:** Placeholder
+**Contact:** srinivas-bandi-pro
