@@ -290,6 +290,35 @@ open public issues containing secrets, model artifacts, or security details.
 
 This project is licensed under the [MIT License](LICENSE).
 
+
+## TerraMind AI Chat Assistant
+
+TerraMind AI includes a floating AI Chat Assistant available throughout the application.
+
+The assistant is designed specifically for agriculture-related questions and supports:
+
+- English
+- Telugu
+- Roman Telugu
+- Mixed-language questions
+
+### AI Chat API
+
+The assistant uses the following API endpoint:
+
+```text
+POST /api/chat
+JSON
+{
+  "message": "When should I plant rice?",
+  "language": "en"
+}
+JSON Response Example
+{
+  "response": "Rice is generally planted when suitable temperature, water availability, and soil conditions are present. Please consider local agricultural recommendations for the best planting time.",
+  "language": "en"
+}
+
 ## Author
 
 **Author:** Bandi Srinivas
